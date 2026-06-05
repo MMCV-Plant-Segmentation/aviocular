@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>aviocular</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- ── Welcome screen ─────────────────────────────────────────────────────── -->
+<div id="welcomeScreen">
+  <div class="welcome-card">
+    <h1>aviocular</h1>
+    <button id="btnNewProject">+ New project</button>
+    <button id="btnOpenProject">&#8599; Open project</button>
+    <div id="recentList" style="display:none">
+      <div class="recent-header">Recent</div>
+      <div id="recentItems"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Footage editor screen ──────────────────────────────────────────────── -->
+<div id="editorScreen" style="display:none">
+  <div class="editor-header">
+    <h2>Manage footage</h2>
+    <button id="btnAddFolder">+ Add folder</button>
+  </div>
+  <div class="editor-body">
+    <div class="editor-section">
+      <div class="editor-section-title">Folders</div>
+      <div id="editorFolderList"></div>
+    </div>
+    <div class="editor-section editor-files">
+      <div class="editor-section-title">Files</div>
+      <div id="editorFileList"></div>
+    </div>
+  </div>
+  <div class="editor-footer">
+    <button id="btnEditorCancel">Cancel</button>
+    <button id="btnEditorConfirm">Confirm</button>
+  </div>
+</div>
+
+<!-- ── App screen ─────────────────────────────────────────────────────────── -->
+<div id="appScreen" style="display:none">
+
+<div id="toolbar">
+  <div class="tb-group">
+    <button id="btnHome"      title="Close project and return to home">&#8962;</button>
+    <button id="btnBack"      disabled title="Back (Alt+Left)">&#8592; Back</button>
+    <button id="btnFwd"       disabled title="Forward (Alt+Right)">Forward &#8594;</button>
+    <button id="btnResetZoom" title="Reset to fit-all view">&#8857; Reset zoom</button>
+  </div>
+  <div class="tb-sep"></div>
+  <div class="tb-group">
+    <button id="btnBoxZoom"  title="Box zoom: drag to select region">&#8862; Box Zoom</button>
+    <button id="btnRotateCCW" title="Rotate map 90° CCW">&#8634; 90°</button>
+    <button id="btnRotateCW"  title="Rotate map 90° CW">&#8635; 90°</button>
+    <label class="tb-check" title="Keep map and video rotation in sync">
+      <input type="checkbox" id="chkSyncRotation"> &#8596; Sync rotations
+    </label>
+    <button id="btnGrid" class="active" title="Toggle coordinate grid">&#8999; Grid</button>
+  </div>
+  <div class="tb-sep"></div>
+  <div class="tb-group">
+    <label for="dsInput" style="font-size:12px;color:#aaa">Every</label>
+    <input id="dsInput" type="number" min="1" value="6"
+           title="Show every Nth GPS point on the map (lower = denser, higher = faster)">
+    <span style="font-size:12px;color:#aaa">frames</span>
+  </div>
+  <div class="tb-sep"></div>
+  <button id="btnSave" title="Save UI state to config file">&#128190; Save</button>
+  <div class="tb-sep"></div>
+  <div id="legend"></div>
+  <button id="btnManageFootage" title="Manage footage folders and clips">&#128194; Footage</button>
+</div>
+
+<div id="main">
+  <div id="mapPanel">
+    <canvas id="mapCanvas"></canvas>
+    <div id="tooltip"></div>
+    <div id="selectionOverlay"></div>
+  </div>
+  <div id="videoPanel">
+    <div id="videoControls">
+      <div id="videoInfo">No video loaded</div>
+      <div class="tb-group">
+        <button id="btnRotVidCCW" title="Rotate video 90° counter-clockwise">&#8630; &minus;90°</button>
+        <button id="btnRotVidCW"  title="Rotate video 90° clockwise">&#8631; +90°</button>
+        <button id="btnSetNorth"  title="Set compass top to match current map orientation">Match map</button>
+      </div>
+    </div>
+    <div id="videoWrapper">
+      <video id="videoEl" controls preload="metadata"></video>
+      <div id="compassOverlay">
+        <span class="compass-label" id="cTop">?</span>
+        <span class="compass-label" id="cRight">?</span>
+        <span class="compass-label" id="cBottom">?</span>
+        <span class="compass-label" id="cLeft">?</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- #appScreen -->
+
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>
